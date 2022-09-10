@@ -4,24 +4,20 @@ const destroyBtn = document.querySelector("[data-destroy]");
 const boxes = document.querySelector("#boxes");
 
 destroyBtn.addEventListener("click", destroyBoxes);
-
-inputRef.addEventListener("change", (el) => {
-  //   const number = el.currentTarget.value;
-
-  // Не розумію, чому працює відразу. А не при кліку.
-  createBtn.addEventListener("click", createBoxes(el.currentTarget.value));
+createBtn.addEventListener("click", () => {
+  createBoxes(inputRef.value);
 });
 
 function createBoxes(amount) {
+  destroyBoxes();
+
   for (let i = 0; i < amount; i += 1) {
     const box = document.createElement("div");
     box.style.width = `${30 + i * 10}px`;
     box.style.height = `${30 + i * 10}px`;
     box.style.backgroundColor = getRandomHexColor();
 
-    // Чомусь не працює через insertAdjacentHTML
-    // boxes.insertAdjacentHTML('beforeend', box);
-    boxes.append(box);
+    boxes.insertAdjacentHTML("beforeend", box.outerHTML);
   }
 }
 
